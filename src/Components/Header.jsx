@@ -1,12 +1,14 @@
-import React from 'react'
-import Logo from './Logo'
-import Counter from './Counter'
+import Logo from "./Logo";
+import Counter from "./Counter";
 
-export default function Header() {
+export default function Header({ itemsPacked, totalNumberOfItems }) {
   return (
-   <header>
-    <Logo />
-    <Counter />
-   </header>
-  )
+    <header>
+      <Logo />
+      <Counter
+        itemsPacked={itemsPacked}
+        totalNumberOfItems={totalNumberOfItems}
+      />
+    </header>
+  );
 }
