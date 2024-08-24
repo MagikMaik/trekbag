@@ -1,31 +1,31 @@
 import Button from "./Button";
-import { secondaryButtons } from "../lib/constants";
 
-export default function ButtonGroup({
-  resetAll,
-  removeAll,
-  markAll,
-  unMarkAll,
-}) {
+import { useItemsStore } from "../Stores/itemStore";
+
+export default function ButtonGroup() {
+  const handleMarkAll = useItemsStore((state) => state.handleMarkAll);
+  const handleUnMarkAll = useItemsStore((state) => state.handleUnMarkAll);
+  const handleReset = useItemsStore((state) => state.reset);
+  const handleRemoveAllItems = useItemsStore((state) => state.removeAllItems);
   const secondaryButtons = [
     {
       text: "All Done",
-      onClick: markAll,
+      onClick: handleMarkAll,
       buttonType: "secondary",
     },
     {
       text: "All Not Done",
-      onClick: unMarkAll,
+      onClick: handleUnMarkAll,
       buttonType: "secondary",
     },
     {
       text: "Reset All",
-      onClick: resetAll,
+      onClick: handleReset,
       buttonType: "secondary",
     },
     {
       text: "Remove All",
-      onClick: removeAll,
+      onClick: handleRemoveAllItems,
       buttonType: "secondary",
     },
   ];

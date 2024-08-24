@@ -1,4 +1,4 @@
-export const startItems = [
+export const initialItems = [
   {
     id: 1,
     name: "Good moode",

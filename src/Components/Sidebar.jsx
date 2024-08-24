@@ -1,12 +1,13 @@
-import React from "react";
 import AddItemForm from "./AddItemForm";
 import ButtonGroup from "./ButtonGroup";
+import { useItemsStore } from "../Stores/itemStore";
 
-export default function Sidebar({onAddItems, removeAll, resetAll, markAll, unMarkAll}) {
+export default function Sidebar() {
+  const handleAddItems = useItemsStore((state) => state.addItem);
   return (
     <div className="sidebar">
-      <AddItemForm onAddItems={onAddItems}/>
-      <ButtonGroup removeAll={removeAll} resetAll={resetAll} markAll={markAll} unMarkAll={unMarkAll}/>
+      <AddItemForm onAddItems={handleAddItems} />
+      <ButtonGroup />
     </div>
   );
 }

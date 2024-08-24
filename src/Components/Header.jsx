@@ -1,13 +1,16 @@
 import Logo from "./Logo";
 import Counter from "./Counter";
 
-export default function Header({ itemsPacked, totalNumberOfItems }) {
+import { useItemsStore } from "../Stores/itemStore";
+
+export default function Header() {
+  const items = useItemsStore((state) => state.items);
   return (
     <header>
       <Logo />
       <Counter
-        itemsPacked={itemsPacked}
-        totalNumberOfItems={totalNumberOfItems}
+        itemsPacked={items.filter((item) => item.packed).length}
+        totalNumberOfItems={items.length}
       />
     </header>
   );

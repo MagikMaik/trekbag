@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import EmptyView from "./EmptyView";
 import Select from "react-select";
 
-export default function ItemList({ items, deleteItem, toggle }) {
+import { useItemsStore } from "../Stores/itemStore";
+
+export default function ItemList() {
+  const items = useItemsStore((state) => state.items);
+  const handleDeleteItem = useItemsStore((state) => state.deleteItem);
+  const handleToggleItem = useItemsStore((state) => state.toggleItem);
   const sortingOptions = [
     { value: "default", label: "Sort by default" },
     { value: "packed", label: "Sort by packed" },
     { value: "unpacked", label: "Sort by unpacked" },
   ];
   const [SortyBy, setSortBy] = useState("default");
-  const sortedItems = [...items].sort((a, b) => {
-    if (SortyBy === "packed") {
-      return b.packed - a.packed;
-    }
-    if (SortyBy === "unpacked") {
-      return a.packed - b.packed;
-    }
-    return;
-  });
+
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        if (SortyBy === "packed") {
+          return b.packed - a.packed;
+        }
+        if (SortyBy === "unpacked") {
+          return a.packed - b.packed;
+        }
+        return;
+      }),
+    [items, SortyBy]
+  );
   return (
     <ul>
       {items.length === 0 && <EmptyView />}
@@ -32,10 +42,10 @@ export default function ItemList({ items, deleteItem, toggle }) {
       )}
       {sortedItems.map((item) => (
         <Item
-          deleteItem={deleteItem}
+          deleteItem={handleDeleteItem}
           item={item}
           key={item.name}
-          toggle={toggle}
+          toggle={handleToggleItem}
         />
       ))}
     </ul>
