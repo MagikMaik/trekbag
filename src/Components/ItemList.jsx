@@ -29,7 +29,7 @@ export default function ItemList() {
     [items, SortyBy]
   );
   return (
-    <ul>
+    <ul className="item-list">
       {items.length === 0 && <EmptyView />}
       {items.length > 0 && (
         <section className="sorting">
